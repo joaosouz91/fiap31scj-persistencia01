@@ -1,0 +1,9 @@
+package br.com.fiap.joao.persistencia01.JDBCTemplate.viewmodel;
+
+public class CursoAlunoViewModel {
+	
+	private String descricaoCurso;
+	private String nomeAluno;
+	private Double notaAluno;
+
+}

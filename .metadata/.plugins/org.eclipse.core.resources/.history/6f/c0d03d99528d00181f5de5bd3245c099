@@ -1,0 +1,35 @@
+package br.com.fiap.joao.persistencia01.JDBCTemplate.dao;
+
+import javax.sql.DataSource;
+import org.springframework.jdbc.core.JdbcTemplate;
+import br.com.fiap.joao.persistencia01.JDBCTemplate.entity.Curso;
+
+public class CursoDao {
+
+	private JdbcTemplate jdbcTemplate;
+	
+	//datasource
+	public void setDataSource(DataSource dataSource) {
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+	
+	//incluir um curso
+	public void incluirCurso(Curso curso) throws Exception{
+		
+		try {
+			String sql = "INSERT INTO CURSO () VALUES (?, ?)";
+			jdbcTemplate.update(sql, curso.getNomeCurso(), curso.getCargaHoraria());
+		} catch (Exception e) {
+			throw e;
+		}
+		
+	}
+	
+	//buscar um curso
+	public Curso buscarCurso() throws Exception {
+		
+	}
+	
+	//listar todos os cursos
+	
+}

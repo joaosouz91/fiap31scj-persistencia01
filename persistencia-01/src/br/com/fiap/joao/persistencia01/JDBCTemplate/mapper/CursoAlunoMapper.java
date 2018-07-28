@@ -1,0 +1,23 @@
+package br.com.fiap.joao.persistencia01.JDBCTemplate.mapper;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.springframework.jdbc.core.RowMapper;
+
+import br.com.fiap.joao.persistencia01.JDBCTemplate.entity.CursoAluno;
+
+public class CursoAlunoMapper implements RowMapper<CursoAluno> {
+
+	@Override
+	public CursoAluno mapRow(ResultSet rs, int rowNum) throws SQLException {
+		
+		CursoAluno cursoAluno = new CursoAluno();
+		cursoAluno.setMatricula(rs.getInt("aluno"));
+		cursoAluno.setIdCurso(rs.getInt("curso"));
+		cursoAluno.setNota(rs.getDouble("nota"));
+		
+		return cursoAluno;
+	}
+
+}

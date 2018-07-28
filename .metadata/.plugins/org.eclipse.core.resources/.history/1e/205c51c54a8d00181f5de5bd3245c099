@@ -1,0 +1,43 @@
+package br.com.fiap.joao.persistencia01.JDBCTemplate.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.sql.DataSource;
+import org.springframework.jdbc.core.JdbcTemplate;
+import br.com.fiap.joao.persistencia01.JDBCTemplate.entity.Aluno;
+
+public class AlunoDao {
+	
+	private JdbcTemplate jdbcTemplate;
+	
+	//datasource
+	public void setDataSource(DataSource dataSource) {
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+	
+	//incluir um Aluno
+	public void incluirAluno(Aluno aluno) {
+		try {
+			
+			String sql = "";
+			jdbcTemplate.update(sql, aluno.getMatricula(), aluno.getNome());
+			
+		}catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	//buscar um Aluno
+	public Aluno buscarAluno(int id) {
+		
+		return new Aluno();
+		
+	}
+	
+	//listar todos os Alunos
+	public List<Aluno> listarAlunos(){
+		
+		return new ArrayList();
+	}
+}

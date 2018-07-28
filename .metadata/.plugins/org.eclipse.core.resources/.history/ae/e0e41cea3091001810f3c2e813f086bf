@@ -1,0 +1,38 @@
+package br.com.fiap.persistencia01.JPA.entity;
+
+import java.io.Serializable;
+
+import javax.persistence.*;
+
+import br.com.fiap.persistencia01.JPA.pk.CursoAluno;
+
+@Entity
+@Table(name="cursoaluno")
+public class CursoAluno implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
+	@EmbeddedId
+	private CursoAluno notaPK;
+	
+	@Column(name="nota", columnDefinition="decimal(12,2)")
+	Double nota;
+
+	public CursoAluno getNotaPK() {
+		return notaPK;
+	}
+	
+	public void setNotaPK(CursoAluno notaPK) {
+		this.notaPK = notaPK;
+	}
+
+	public Double getNota() {
+		return nota;
+	}
+
+	public void setNota(Double nota) {
+		this.nota = nota;
+	}
+	
+
+}

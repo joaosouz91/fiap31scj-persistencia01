@@ -1,0 +1,26 @@
+package br.com.fiap.joao.persistencia01.JDBCTemplate.viewmodel;
+
+import br.com.fiap.joao.persistencia01.JDBCTemplate.entity.CursoAluno;
+
+public class CursoAlunoViewModel {
+	
+	private String descricaoCurso;
+	private String nomeAluno;
+	private CursoAluno cursoAluno;
+	
+	public String getDescricaoCurso() {
+		return descricaoCurso;
+	}
+	public void setDescricaoCurso(String descricaoCurso) {
+		this.descricaoCurso = descricaoCurso;
+	}
+	public String getNomeAluno() {
+		return nomeAluno;
+	}
+	public void setNomeAluno(String nomeAluno) {
+		this.nomeAluno = nomeAluno;
+	}
+	
+	
+
+}

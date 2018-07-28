@@ -1,0 +1,23 @@
+package br.com.fiap.joao.persistencia01.JDBCTemplate.mapper;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.springframework.jdbc.core.RowMapper;
+
+import br.com.fiap.joao.persistencia01.JDBCTemplate.entity.Nota;
+
+public class NotaMapper implements RowMapper<Nota> {
+
+	@Override
+	public Nota mapRow(ResultSet rs, int rowNum) throws SQLException {
+		
+		Nota nota = new Nota();
+		nota.setAluno(rs.getInt("aluno"));
+		nota.setCurso(rs.getInt("curso"));
+		nota.setNota(rs.getDouble("nota"));
+		
+		return nota;
+	}
+
+}

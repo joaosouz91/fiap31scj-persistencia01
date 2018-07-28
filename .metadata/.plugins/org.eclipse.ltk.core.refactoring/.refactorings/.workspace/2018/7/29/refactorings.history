@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 0 elements to &apos;persistencia-01/src/br.com.fiap.persistencia01.JPA.entity&apos;&#x0D;&#x0A;- Destination element: &apos;persistencia-01/src/br.com.fiap.persistencia01.JPA.entity&apos;" description="Copy compilation units" destination="=persistencia-01/src&lt;br.com.fiap.persistencia01.JPA.entity" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1531678407729" units="0" version="1.0"/>
+</session>

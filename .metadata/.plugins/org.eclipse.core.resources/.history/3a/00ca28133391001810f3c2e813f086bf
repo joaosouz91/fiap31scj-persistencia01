@@ -1,0 +1,171 @@
+package br.com.fiap.joao.persistencia01.aplicacao;
+
+import javax.swing.JOptionPane;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import br.com.fiap.joao.persistencia01.JDBCTemplate.dao.AlunoDao;
+import br.com.fiap.joao.persistencia01.JDBCTemplate.dao.CursoDao;
+import br.com.fiap.joao.persistencia01.JDBCTemplate.dao.CursoAlunoDao;
+import br.com.fiap.joao.persistencia01.JDBCTemplate.entity.Aluno;
+import br.com.fiap.joao.persistencia01.JDBCTemplate.entity.Curso;
+import br.com.fiap.joao.persistencia01.JDBCTemplate.entity.CursoAluno;
+
+public class SchoolAppJDBCTemplate {
+
+	public static void main(String[] args) throws Exception {
+		
+		String input;
+		String[] options = {"1 - Incluir Curso", "2 - Buscar Curso", "3 - Incluir Aluno", "4 - Buscar Aluno"};
+		do {
+			input = (String)JOptionPane.showInputDialog(null, "O que deseja fazer?", null, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+			if (input == null){
+				JOptionPane.showMessageDialog(null, "Usuário cancelou a operação");
+				break;
+			}
+			switch (Integer.parseInt(input.substring(0, 1))) {
+			case 1:
+				incluirCurso();
+				break;
+			case 2:
+				buscarCurso();
+				break;
+			case 3:
+				incluirAluno();
+				break;
+			case 4: 
+				buscarAluno();
+				break;
+			} 
+		} while (Integer.parseInt(input.substring(0, 1)) > 0);
+	}
+	
+	public static void incluirCurso() {
+		try {
+
+			String nomeCurso = JOptionPane.showInputDialog("Insira o nome do curso.");
+			String cargaHoraria = JOptionPane.showInputDialog("Insira a carga horára do curso (número inteiro)");
+			if (nomeCurso == null || cargaHoraria == null){
+				return;
+			}
+			
+			ApplicationContext context = new ClassPathXmlApplicationContext("beanJdbc.xml");
+			CursoDao cursoDao = (CursoDao) context.getBean("CursoDao");
+			Curso curso = new Curso();
+			curso.setNomeCurso(nomeCurso);
+			curso.setCargaHoraria(cargaHoraria+"h");
+			
+			cursoDao.incluirCurso(curso);
+			
+			JOptionPane.showMessageDialog(null, "curso incluído com sucesso");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void buscarCurso() {
+		
+		int idCurso = Integer.parseInt(JOptionPane.showInputDialog("Insira o id do curso"));
+		if(idCurso == 0) throw new NumberFormatException();
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("beanJdbc.xml");
+		CursoDao cursoDao = (CursoDao) context.getBean("CursoDao");
+		Curso curso = null;
+		
+		try {
+			curso = cursoDao.buscarCurso(idCurso);
+		} catch(NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Número inválido");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(curso!=null) {
+			JOptionPane.showMessageDialog(null, "Nome Curso: " + curso.getNomeCurso()
+					+ "\nCarga Horária: " + curso.getCargaHoraria());
+		} else {
+			JOptionPane.showMessageDialog(null, "Nenhum aluno encontrado para este número de matrícula.");
+		}
+	}
+	
+	public static void incluirAluno() {
+		
+		String nomeAluno = JOptionPane.showInputDialog("Insira o nome do aluno.");
+		if (nomeAluno == null){
+			return;
+		}
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("beanJdbc.xml");
+		AlunoDao alunoDao = null;
+		Aluno aluno = null;
+		try {
+			aluno = new Aluno();
+			aluno.setNome(nomeAluno);
+			alunoDao = (AlunoDao) context.getBean("AlunoDao");
+			alunoDao.incluirAluno(aluno);
+			
+			JOptionPane.showMessageDialog(null, "Aluno incluído com sucesso");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void buscarAluno() {
+		
+		int matricula = Integer.parseInt(JOptionPane.showInputDialog("Insira o número da matrícula do aluno."));
+		if(matricula == 0) throw new NumberFormatException();
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("beanJdbc.xml");
+		AlunoDao alunoDao = (AlunoDao) context.getBean("AlunoDao");
+		Aluno aluno = null;
+		
+		try {
+			aluno = alunoDao.buscarAluno(matricula);
+		} catch(NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Número inválido");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(aluno!=null) {
+			JOptionPane.showMessageDialog(null, "Matrícula: " + aluno.getMatricula()
+					+ "\nNome: " + aluno.getNome());
+		} else {
+			JOptionPane.showMessageDialog(null, "Nenhum aluno encontrado para este número de matrícula.");
+		}
+	}
+	
+	public static void incluirNota() {
+		
+		String input = null;
+		Double nota = null;
+		try {
+			input = JOptionPane.showInputDialog("Digite a nota do aluno.");
+		}catch(NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Digite um valor numérico");
+			return;
+		}
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("beanJdbc.xml");
+		CursoAluno cursoAluno = null;
+		CursoAlunoDao cursoAlunoDao = null;
+		try {
+			cursoAlunoDao = (CursoAlunoDao)context.getBean("NotaDao");
+			cursoAluno = new CursoAluno(new Aluno(), new Curso(), input);
+			cursoAlunoDao.inserirNota(cursoAluno);
+			JOptionPane.showMessageDialog(null, "Nota incluída com sucesso");
+		} catch (Exception e) {
+			throw e;
+		}
+		
+	}
+	
+	public static void buscarNota() {
+		
+	}
+	
+
+}

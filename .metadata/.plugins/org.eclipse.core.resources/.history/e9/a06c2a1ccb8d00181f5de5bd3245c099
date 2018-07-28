@@ -1,0 +1,46 @@
+package br.com.fiap.joao.persistencia01.JDBCTemplate.dao;
+
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import br.com.fiap.joao.persistencia01.JDBCTemplate.entity.Aluno;
+import br.com.fiap.joao.persistencia01.JDBCTemplate.entity.Curso;
+import br.com.fiap.joao.persistencia01.JDBCTemplate.entity.Nota;
+
+public class NotaDao {
+
+	private JdbcTemplate jdbcTemplate;
+	
+	//datasource
+	public void setDataSource(DataSource datasource) {
+		this.jdbcTemplate = new JdbcTemplate(datasource);
+	}
+	
+	//inserir uma nota
+	public void inserirNota(Aluno aluno, Curso curso, Double nota) {
+		
+		try {
+			String sql = " INSERT INTO NOTA "
+					+ " (nota, curso, aluno) VALUES (?, ? , ?) ";
+			jdbcTemplate.update(sql, nota, curso.getIdCurso(), aluno.getMatricula() );
+		} catch (Exception e) {
+			throw e;
+		}
+		
+	}
+	
+	//buscar uma nota
+	public Nota buscarNota(int matricula, int curso) {
+		
+		
+		return new Nota();
+	}
+	
+	//listar notas
+	public List<Nota> listarNotas(){
+		return null;
+		
+	}
+}

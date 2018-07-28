@@ -1,0 +1,20 @@
+1532220156237	Delete element
+1532301428220	Rename local variable 'matricula'
+1532649637395	Rename type 'Nota'
+1532649667278	Rename type 'NotaDao'
+1532649683930	Rename local variable 'nota'
+1532649741642	Rename local variable 'nota'
+1532649756426	Rename type 'NotaMapper'
+1532649767025	Rename local variable 'nota'
+1532649918219	Rename type 'Nota'
+1532649958081	Rename type 'NotaPK'
+1532649990722	Rename field 'notaPK'
+1532650056241	Rename type 'CursoAluno'
+1532650530400	Rename local variable 'notaDao'
+1532650851661	Rename local variable 'nota'
+1532654121991	Delete element
+1532654352469	Delete element
+1532654372930	Delete element
+1532811728272	Rename field 'idMatricula'
+1532811737295	Rename method 'setIdMatricula'
+1532811746367	Rename method 'getIdMatricula'

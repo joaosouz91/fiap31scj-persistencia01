@@ -1,0 +1,46 @@
+package br.com.fiap.joao.persistencia01.JDBCTemplate.entity;
+
+public class Nota {
+	
+	private Aluno aluno;
+	private Curso curso;
+	private Double nota;
+	
+	public Nota() {}
+	
+	public Nota(Aluno aluno, Curso curso) {
+		this.aluno = aluno;
+		this.curso = curso;
+	}
+	
+	public Nota(Aluno aluno, Curso curso, Double nota) {
+		this.aluno = aluno;
+		this.curso = curso;
+		this.nota = nota;
+	}
+	
+	public Aluno getAluno() {
+		return aluno;
+	}
+	
+	public void setAluno(int matricula) {
+		this.aluno.setMatricula(matricula);
+	}
+	
+	public Curso getCurso() {
+		return curso;
+	}
+	
+	public void setCurso(int curso) {
+		this.curso.setIdCurso(curso);
+	}
+	
+	public Double getNota() {
+		return nota;
+	}
+	
+	public void setNota(Double nota) {
+		this.nota = nota;
+	}
+
+}
